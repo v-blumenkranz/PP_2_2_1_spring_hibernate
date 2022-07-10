@@ -4,7 +4,6 @@ import hiber.config.AppConfig;
 import hiber.model.Car;
 import hiber.model.User;
 import hiber.service.UserService;
-import org.hibernate.Session;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
@@ -36,7 +35,7 @@ public class MainApp {
          System.out.println();
       }
 
-      userService.getUser("Venedig", 234);
+      System.out.println(userService.getUser("Venedig", 234).toString());
 
       context.close();
    }

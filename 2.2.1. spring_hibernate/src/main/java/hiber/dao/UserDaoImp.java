@@ -29,11 +29,10 @@ public class UserDaoImp implements UserDao {
 
    public User getUser(String model, int series) {
       User user = sessionFactory.getCurrentSession().createQuery(
-              "SELECT User AS u from User user WHERE user.car.series = :s AND user.car.model = :m", User.class)
+              "FROM User u WHERE u.car.series = :s AND u.car.model = :m", User.class)
               .setParameter("s", series)
               .setParameter("m", model)
               .getSingleResult();
-      System.out.println(user);
       return user;
    }
 

@@ -3,6 +3,7 @@ package hiber;
 import hiber.config.AppConfig;
 import hiber.model.Car;
 import hiber.model.User;
+import hiber.service.CarService;
 import hiber.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -15,6 +16,7 @@ public class MainApp {
             new AnnotationConfigApplicationContext(AppConfig.class);
 
       UserService userService = context.getBean(UserService.class);
+      CarService carService = context.getBean(CarService.class);
 
       Car car1 = new Car("Verona", 123);
       Car car2 = new Car("Venedig", 234);
@@ -35,7 +37,15 @@ public class MainApp {
          System.out.println();
       }
 
-      System.out.println(userService.getUser("Venedig", 234).toString());
+      System.out.println(userService.getUserByCarModelAndSeries("Venedig", 234).toString());
+
+
+      // === Демонстрация работы методов дао и сервисного слоев для Car
+      System.out.println(carService.listCars().toString());
+      System.out.println(carService.getCarById(2L).toString());
+      Car car = new Car("Vishniy Volochek", 567);
+      carService.addCar(car);
+      System.out.println(carService.listCars().toString());
 
       context.close();
    }
